@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   # PUT /posts/1,2,3,4
   def update
     # Invalid id? No problem...
-    @posts = Post.all(:conditions => { :id => [1,2,3] })
+    @posts = Post.all(:conditions => { :id => params[:ids] })
     
     # optional: enforce policy on each post
     @posts.each do |post|
