@@ -39,9 +39,9 @@ class PostsControllerTest < ActionController::TestCase
       '3' => { 'title' => "None" }  # this one does not exist.
     }
     
-    # What should happen?
-    # - Graceful: invalid entries are ignored...
-    # - Strict: everything works or nothing does...
+    # tolerant of mistakes
+    assert_equal('Uno', Post.find(1).title)
+    assert_equal('Dos', Post.find(2).title)
   end
   
 end

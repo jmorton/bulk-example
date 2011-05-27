@@ -20,8 +20,14 @@ class PostsController < ApplicationController
   
   # PUT /posts/1,2,3,4
   def update
-    # Strict, no policy enforcement == Dangerous and harder to use?
-    Post.update(params[:posts].keys, params[:posts].values)
+    # Invalid id? No problem...
+    @posts = Post.all(:conditions => { :id => [1,2,3] })
+    
+    # optional: enforce policy on each post
+    @posts.each do |post|
+      post.update_attributes(params[:posts][post.id.to_s]) 
+    end
+    
     head :ok
   end
      
